@@ -2,7 +2,7 @@
 
 ![testes](https://github.com/mikelevianna-eng/casa-verde-margem/actions/workflows/testes.yml/badge.svg)
 
-Pipeline completo de dados que identifica onde uma distribuidora de pequeno porte perde margem, partindo de exportações brutas de ERP e chegando a um relatório executivo pronto para decisão.
+Pipeline completo de dados que identifica onde uma distribuidora de pequeno porte perde margem, partindo de exportações brutas de ERP e chegando a um relatório executivo pronto para a tomada de decisão.
 
 > Projeto de portfólio construído com dados sintéticos. A metodologia, o código e os cálculos são reais. Os dados foram gerados por script para permitir a publicação, já que bases de clientes não podem ser divulgadas.
 
@@ -14,7 +14,7 @@ A Casa Verde é uma distribuidora de material de limpeza e descartáveis com 5 f
 
 > "Vendo mais todo ano e não sobra dinheiro no caixa. Não sei quais produtos e quais clientes dão lucro de verdade."
 
-O sistema da empresa mostra margem por produto, mas calcula apenas preço de venda menos custo de compra. Ficam de fora o desconto concedido, o custo real da entrega e a comissão do vendedor. É nessa diferença que o resultado desaparece.
+O sistema da empresa mostra a margem por produto, mas calcula apenas o preço de venda menos custo de compra. Ficam de fora o desconto concedido, o custo real da entrega e a comissão do vendedor. É nessa diferença que o resultado desaparece.
 
 ---
 
@@ -40,7 +40,7 @@ O sistema da empresa mostra margem por produto, mas calcula apenas preço de ven
 | 15 a 20% | R$ 36.275 | **−6,7%** |
 | Acima de 20% | R$ 17.612 | **−31,7%** |
 
-Toda venda com desconto acima de 10% destrói resultado. Esse achado vira uma regra comercial aplicável de imediato, sem investimento e sem mudança de sistema.
+Toda venda com desconto acima de 10% destrói o resultado. Esse achado vira uma regra comercial aplicável de imediato, sem investimento e sem mudança de sistema.
 
 **Os maiores clientes são os menos rentáveis.** A margem média da carteira é 12,6%. Os três maiores clientes rendem entre 4,2% e 6,2%, menos da metade. São contas antigas com condições comerciais negociadas há anos e nunca revisadas, concentradas justamente na categoria de menor margem.
 
@@ -48,7 +48,7 @@ Toda venda com desconto acima de 10% destrói resultado. Esse achado vira uma re
 
 ## O que o pipeline faz
 
-Os dados chegam como três exportações de ERP com os defeitos típicos desse tipo de arquivo. Valores monetários aparecem como `1.234,56`, `89.90` e `R$ 12,30` na mesma coluna. Datas alternam entre três formatos. CNPJ vem mascarado em alguns registros e limpo em outros. Há linhas duplicadas, devoluções lançadas como quantidade negativa sem sinalização e pedidos apontando para clientes que não existem no cadastro.
+Os dados chegam como três exportações de ERP com os defeitos típicos desse tipo de arquivo. Valores monetários aparecem como `1.234,56`, `89.90` e `R$ 12,30` na mesma coluna. Datas alternam entre três formatos. O CNPJ vem mascarado em alguns registros e limpo em outros. Há linhas duplicadas, devoluções lançadas como quantidade negativa sem sinalização e pedidos apontando para clientes que não existem no cadastro.
 
 O tratamento resolve tudo isso e registra cada correção aplicada.
 
@@ -101,11 +101,13 @@ casa-verde-margem/
 │   ├── gerar_dados.py        Gerador da base sintética
 │   ├── limpeza.py            Tratamento, padronização e cálculo de margem
 │   ├── analise.py            Rankings, curva ABC e análise de frete
-│   └── relatorio_excel.py    Geração do relatório executivo
+│   ├── relatorio_excel.py    Geração do relatório executivo
+│   └── exportar_sheets.py    Envio das tabelas para o Looker Studio
 ├── tests/                    53 testes automatizados
-├── notebooks/                Análise exploratória
 ├── data/output/              Relatório entregue ao cliente
-└── .github/workflows/        Execução automática dos testes
+├── .github/workflows/        Execução automática dos testes
+├── requirements.txt
+└── pytest.ini
 ```
 
 ---
