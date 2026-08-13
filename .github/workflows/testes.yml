@@ -1,0 +1,32 @@
+name: testes
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar o repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar o Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Rodar os testes
+        run: pytest -v
+
+      - name: Validar o pipeline de ponta a ponta
+        run: |
+          python src/gerar_dados.py
+          python src/limpeza.py
