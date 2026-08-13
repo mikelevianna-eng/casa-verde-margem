@@ -208,14 +208,14 @@ def montar_resumo(ws, achados, periodo):
     ws["B2"] = "Casa Verde Distribuidora"
     ws["B2"].font = Font(name=FONTE, size=18, bold=True, color=AZUL_ESCURO)
 
-    ws["B3"] = "Analise de margem de contribuicao por produto, cliente e categoria"
+    ws["B3"] = "Análise de margem de contribuição por produto, cliente e categoria"
     ws["B3"].font = Font(name=FONTE, size=11, color="595959")
 
-    ws["B4"] = f"Periodo analisado: {periodo}"
+    ws["B4"] = f"Período analisado: {periodo}"
     ws["B4"].font = Font(name=FONTE, size=10, italic=True, color="595959")
 
     linha = 6
-    ws[f"B{linha}"] = "RESULTADO DO PERIODO"
+    ws[f"B{linha}"] = "RESULTADO DO PERÍODO"
     ws[f"B{linha}"].font = Font(name=FONTE, size=11, bold=True, color="FFFFFF")
     ws[f"B{linha}"].fill = PatternFill("solid", fgColor=AZUL_ESCURO)
     ws[f"C{linha}"].fill = PatternFill("solid", fgColor=AZUL_ESCURO)
@@ -224,7 +224,7 @@ def montar_resumo(ws, achados, periodo):
     # capa recalcula sozinha se aquela tabela for alterada.
     indicadores = [
         ("Receita total", "=SUM(Categorias!B5:B9)", MOEDA_INT),
-        ("Margem de contribuicao", "=SUM(Categorias!C5:C9)", MOEDA_INT),
+        ("Margem de contribuição", "=SUM(Categorias!C5:C9)", MOEDA_INT),
         ("Margem sobre a receita", "=IFERROR(C8/C7*100,0)", PERCENTUAL),
         ("Frete subsidiado no ano", "=SUM(Categorias!E5:E9)", MOEDA_INT),
     ]
@@ -262,7 +262,7 @@ def montar_resumo(ws, achados, periodo):
             MOEDA_INT,
         ),
         (
-            "Custo de entrega absorvido pela politica de frete gratis",
+            "Custo de entrega absorvido pela política de frete grátis",
             achados["frete_subsidiado_ano"],
             MOEDA_INT,
         ),
@@ -281,34 +281,65 @@ def montar_resumo(ws, achados, periodo):
         ws[f"C{linha}"].border = BORDA_FINA
         linha += 1
 
-    linha += 1
-    ws[f"B{linha}"] = "COMO LER ESTE RELATORIO"
-    ws[f"B{linha}"].font = Font(name=FONTE, size=11, bold=True, color=AZUL_ESCURO)
+    linha += 2
+    ws[f"B{linha}"] = "GLOSSÁRIO"
+    ws[f"B{linha}"].font = Font(name=FONTE, size=11, bold=True, color="FFFFFF")
+    ws[f"B{linha}"].fill = PatternFill("solid", fgColor=AZUL_ESCURO)
+    ws[f"C{linha}"].fill = PatternFill("solid", fgColor=AZUL_ESCURO)
     linha += 1
 
-    notas = [
-        "Margem de contribuicao desconta do faturamento o custo da mercadoria, "
-        "o custo real da entrega e a comissao do vendedor. E diferente da margem "
-        "bruta mostrada pelo sistema, que considera apenas mercadoria.",
-        "Frete subsidiado e a parcela do custo de entrega que a empresa absorveu "
-        "e nao cobrou do cliente.",
-        "Classe ABC segue o criterio de receita acumulada. Classe A concentra os "
-        "primeiros 80 por cento do faturamento.",
-        "Produtos sem custo de compra cadastrado aparecem no faturamento, mas "
-        "ficam fora do calculo de margem. A aba Qualidade dos dados lista quantos sao.",
+    # Cada termo ocupa duas linhas, o nome em destaque e a explicacao logo
+    # abaixo. Texto corrido em bloco unico fica ilegivel nesta largura.
+    glossario = [
+        (
+            "Margem de contribuição",
+            "O que sobra da venda depois de descontar o custo da mercadoria, "
+            "o custo real da entrega e a comissão do vendedor.",
+        ),
+        (
+            "Por que é diferente do sistema",
+            "O ERP calcula apenas preço de venda menos custo de compra. "
+            "Ele não desconta entrega nem comissão, por isso mostra um "
+            "resultado maior do que o real.",
+        ),
+        (
+            "Frete subsidiado",
+            "A parte do custo de entrega que a empresa pagou e não cobrou "
+            "do cliente, principalmente nos pedidos com frete grátis.",
+        ),
+        (
+            "Classe ABC",
+            "Ordena da maior para a menor receita. Classe A reúne os itens "
+            "que somam os primeiros 80 por cento do faturamento, B vai até "
+            "95 por cento e C é o restante.",
+        ),
+        (
+            "Produtos sem custo",
+            "Itens sem custo de compra cadastrado no sistema. A receita "
+            "deles entra no faturamento, mas a margem fica em branco. "
+            "A quantidade está na aba Qualidade dos dados.",
+        ),
     ]
 
-    for nota in notas:
-        ws[f"B{linha}"] = nota
+    for termo, definicao in glossario:
+        ws[f"B{linha}"] = termo
+        ws[f"B{linha}"].font = Font(name=FONTE, size=10, bold=True, color=AZUL_ESCURO)
+        ws[f"B{linha}"].alignment = Alignment(vertical="center")
+        ws.row_dimensions[linha].height = 16
+        linha += 1
+
+        ws[f"B{linha}"] = definicao
         ws[f"B{linha}"].font = Font(name=FONTE, size=9, color="404040")
         ws[f"B{linha}"].alignment = Alignment(wrap_text=True, vertical="top")
-        ws.row_dimensions[linha].height = 42
+        ws[f"B{linha}"].border = BORDA_FINA
+        ws[f"C{linha}"].border = BORDA_FINA
+        ws.row_dimensions[linha].height = 34
         linha += 1
 
     linha += 1
     ws[f"B{linha}"] = (
-        "Dados sinteticos gerados para demonstracao metodologica. "
-        "Os valores nao representam empresa real."
+        "Dados sintéticos gerados para demonstração metodológica. "
+        "Os valores não representam empresa real."
     )
     ws[f"B{linha}"].font = Font(name=FONTE, size=8, italic=True, color="808080")
 
