@@ -22,11 +22,10 @@ O sistema da empresa mostra a margem por produto, mas calcula apenas o preço de
 
 | Indicador | Valor |
 |---|---|
-| Receita analisada | R$ 972.782 |
-| Margem de contribuição real | R$ 123.015 (12,6%) |
-| Frete absorvido pela empresa em um ano | R$ 62.998 |
-| Categoria operando no vermelho | Descartáveis, R$ 19.326 de prejuízo |
-| Produtos com margem negativa | 40, somando R$ 227.036 de receita |
+| Receita analisada | R$ 957.654 |
+| Margem de contribuição real | R$ 143.958 (15,0%) |
+| Frete absorvido pela empresa em um ano | R$ 60.471 |
+| Categoria operando no vermelho | Descartáveis, R$ 10.533 de prejuízo |
 
 **A política de frete grátis custa metade do lucro anual.** A empresa oferece entrega gratuita acima de R$ 600 e absorve o custo integral. Isso consome R$ 62.998 por ano, o equivalente a 51% de toda a margem gerada no período. Sem esse subsídio, Descartáveis sairia do prejuízo e passaria a contribuir positivamente.
 
@@ -34,11 +33,11 @@ O sistema da empresa mostra a margem por produto, mas calcula apenas o preço de
 
 | Faixa de desconto | Receita | Margem |
 |---|---|---|
-| 0 a 5% | R$ 612.087 | 17,6% |
-| 5 a 10% | R$ 229.987 | 10,6% |
-| 10 a 15% | R$ 76.823 | **−1,3%** |
-| 15 a 20% | R$ 36.275 | **−6,7%** |
-| Acima de 20% | R$ 17.612 | **−31,7%** |
+| 0 a 5% | R$ 737.019,44	 | 18,1% |
+| 5 a 10% | R$ 174.269,60	 | 8,6% |
+| 10 a 15% | R$ 32.741,66 | **−7,2%** |
+| 15 a 20% | R$ 8.489,70 | **−13,3%** |
+| Acima de 20% | R$ 5.133,50 | **−21,6%** |
 
 Toda venda com desconto acima de 10% destrói o resultado. Esse achado vira uma regra comercial aplicável de imediato, sem investimento e sem mudança de sistema.
 
