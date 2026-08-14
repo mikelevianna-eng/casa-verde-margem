@@ -80,7 +80,7 @@ Um pedido pode ter margem bruta positiva e margem de contribuição negativa. S�
 ## Entregáveis
 
 - **Relatório executivo em Excel** com nove abas, disponível em [`data/output/`](data/output/). Os indicadores da capa são fórmulas vivas, então a planilha recalcula quando o cliente filtra ou corrige um valor.
-- **Dashboard no Looker Studio** para acompanhamento contínuo.
+- [**Dashboard**](https://mikelevianna-eng.github.io/casa-verde-margem/) para acompanhamento contínuo.
 - **Base tratada em parquet** pronta para consumo por outras ferramentas.
 
 ---
